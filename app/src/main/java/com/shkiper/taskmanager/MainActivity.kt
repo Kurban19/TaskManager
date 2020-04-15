@@ -2,9 +2,7 @@ package com.shkiper.taskmanager
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.github.mikephil.charting.data.ChartData
-import com.github.mikephil.charting.data.PieData
-import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
