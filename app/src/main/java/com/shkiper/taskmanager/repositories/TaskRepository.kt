@@ -5,17 +5,17 @@ import androidx.lifecycle.MutableLiveData
 
 object TaskRepository {
 
-    private val tasks = MutableLiveData<List<Task>>()
+    private val tasks = MutableLiveData(mutableListOf(Task("3", "Сделать програму")))
 
-    fun loadChats() : MutableLiveData<List<Task>> {
+    fun loadChats() : MutableLiveData<MutableList<Task>> {
         return tasks
     }
 
     fun update(task: Task) {
-        val copy = tasks.value!!.toMutableList()
-        val ind = tasks.value!!.indexOfFirst { it.id == task.id }
-        if(ind == -1) return
-        copy[ind] = task
+        val copy = tasks.value
+        //val ind = tasks.value!!.indexOfFirst { it.id == task.id }
+        //if(ind == -1) return
+        copy!!.add(task)
         tasks.value = copy
     }
 

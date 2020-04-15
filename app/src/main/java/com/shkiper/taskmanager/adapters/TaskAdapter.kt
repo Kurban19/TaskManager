@@ -51,13 +51,13 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
         override val containerView: View?
             get() = itemView
 
-        var title = itemView.findViewById<TextView?>(R.id.tv_title)
-        var indicator = itemView.findViewById<TextView?>(R.id.v_color)
+        var title = itemView.findViewById<TextView>(R.id.tv_title)
+        //var indicator = itemView.findViewById<TextView?>(R.id.v_color)
 
         fun bind(item: Task){
 
             title.text = item.title
-            indicator.text =  item.color
+            //indicator.text =  item.color
         }
     }
 }

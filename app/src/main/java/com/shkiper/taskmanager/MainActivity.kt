@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shkiper.taskmanager.adapters.TaskAdapter
+import com.shkiper.taskmanager.models.Task
 import com.shkiper.taskmanager.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -15,6 +16,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var viewModel: MainViewModel
 
+    private val task  = Task("1", "Cделать домашнюю работу")
+    private val task2  = Task("2", "Сделать уборку")
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         initViewModel()
         initViews()
+        viewModel.add(task)
+        viewModel.add(task2)
     }
 
 
@@ -33,6 +40,8 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(divider)
         }
+
+
     }
 
 
