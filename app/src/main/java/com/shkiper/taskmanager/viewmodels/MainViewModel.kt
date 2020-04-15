@@ -24,4 +24,8 @@ class MainViewModel : ViewModel() {
         taskRepository.update(task.copy(isDone = true))
     }
 
+    fun add(task: Task) {
+        taskRepository.update(task)
+    }
+
 }
