@@ -18,7 +18,7 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return TaskViewHolder(inflater.inflate(R.layout.item_task_list, parent, false))
+        return TaskViewHolder(inflater.inflate(R.layout.item_task_low, parent, false))
     }
 
     override fun getItemCount(): Int = items.size

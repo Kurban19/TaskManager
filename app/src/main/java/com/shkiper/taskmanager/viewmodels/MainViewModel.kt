@@ -18,14 +18,10 @@ class MainViewModel : ViewModel() {
         return tasks
     }
 
-    fun addToDone(taskId: String) {
+    fun addToDone(taskId: Int) {
         val task = taskRepository.find(taskId)
         task ?: return
         taskRepository.update(task.copy(isDone = true))
-    }
-
-    fun add(task: Task) {
-        taskRepository.update(task)
     }
 
 }

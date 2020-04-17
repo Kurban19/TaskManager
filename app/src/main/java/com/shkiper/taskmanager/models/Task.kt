@@ -1,9 +1,14 @@
 package com.shkiper.taskmanager.models
 
 data class Task(
-    val id : String,
+    val id: Int,
     var title: String,
-    val color: String = "@color/color_green",
+    val taskType: TaskType = TaskType.Low,
     var isDone: Boolean = false
 ) {
+}
+enum class TaskType{
+    Hard,
+    Medium,
+    Low
 }
