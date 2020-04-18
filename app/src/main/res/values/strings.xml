@@ -5,4 +5,5 @@
     <string name="difficult_string">Difficult:</string>
     <string name="cancel_btn">Cancel</string>
     <string name="add_btn">Add</string>
+    <string name="isEmpty_string">List is empty</string>
 </resources>

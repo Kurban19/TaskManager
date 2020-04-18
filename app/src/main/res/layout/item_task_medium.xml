@@ -8,7 +8,7 @@
         android:id="@+id/v_color"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:background="@drawable/bg_color_green"
+        android:background="@drawable/bg_color_yellow"
         android:layout_centerVertical="true"
         android:layout_marginStart="8dp"/>
 

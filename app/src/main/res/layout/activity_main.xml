@@ -52,5 +52,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
-        tools:listitem="@layout/item_task_low"/>
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

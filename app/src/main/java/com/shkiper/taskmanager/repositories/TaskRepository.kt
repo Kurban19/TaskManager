@@ -1,13 +1,15 @@
 package com.shkiper.taskmanager.repositories
 
+import android.text.BoringLayout
+import androidx.lifecycle.LiveData
 import com.shkiper.taskmanager.models.Task
 import androidx.lifecycle.MutableLiveData
 
 object TaskRepository {
+    private val mutableList = mutableListOf<Task>()
+    private val tasks = MutableLiveData(mutableList)
 
-    private val tasks = MutableLiveData(mutableListOf(Task(16, "Сделать програму")))
-
-    fun loadChats() : MutableLiveData<MutableList<Task>> {
+    fun loadChats() : LiveData<MutableList<Task>> {
         return tasks
     }
 
