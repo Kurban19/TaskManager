@@ -6,4 +6,13 @@
     <string name="cancel_btn">Cancel</string>
     <string name="add_btn">Add</string>
     <string name="isEmpty_string">List is empty</string>
+
+
+    <string name="country_prompt">Choose a country</string>
+
+    <string-array name="difficult_arrays">
+        <item>Low</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
 </resources>

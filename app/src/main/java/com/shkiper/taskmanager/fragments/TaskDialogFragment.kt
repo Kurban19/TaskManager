@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.shkiper.taskmanager.R
 import com.shkiper.taskmanager.models.Task
 import com.shkiper.taskmanager.repositories.TaskRepository
+import com.shkiper.taskmanager.utils.Utils
 import com.shkiper.taskmanager.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.add_task_dialog.*
 
@@ -26,7 +27,7 @@ class TaskDialogFragment : DialogFragment() {
         // Do all the stuff to initialize your custom view
         val view = inflater.inflate(R.layout.add_task_dialog, container, false)
         view.findViewById<Button>(R.id.btn_add).setOnClickListener{
-            val task = Task(TaskRepository.nextChatId(), et_title.text.toString())
+            val task = Task(TaskRepository.nextChatId(), et_title.text.toString(), Utils.toTaskType(spinner.selectedItem.toString()))
             TaskRepository.add(task)
             dismiss()
         }

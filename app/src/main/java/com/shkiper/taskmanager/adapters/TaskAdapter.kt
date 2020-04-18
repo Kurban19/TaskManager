@@ -8,17 +8,32 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shkiper.taskmanager.R
 import com.shkiper.taskmanager.models.Task
+import com.shkiper.taskmanager.models.TaskType
 import kotlinx.android.extensions.LayoutContainer
 
 
 class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
-
+    companion object{
+        private const val LOW_TYPE = 0
+        private const val MEDIUM_TYPE = 1
+        private const val HARD_TYPE = 2
+    }
 
     var items: List<Task> = listOf()
 
+    override fun getItemViewType(position: Int): Int = when(items[position].taskType){
+        TaskType.LOW -> LOW_TYPE
+        TaskType.MEDIUM -> MEDIUM_TYPE
+        TaskType.HARD -> HARD_TYPE
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return TaskViewHolder(inflater.inflate(R.layout.item_task_low, parent, false))
+        return when(viewType){
+            LOW_TYPE -> TaskViewHolder(inflater.inflate(R.layout.item_task_low, parent, false))
+            MEDIUM_TYPE -> TaskViewHolder(inflater.inflate(R.layout.item_task_medium,parent, false))
+            else -> TaskViewHolder(inflater.inflate(R.layout.item_task_hard, parent, false))
+        }
     }
 
     override fun getItemCount(): Int = items.size
