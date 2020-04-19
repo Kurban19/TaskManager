@@ -16,12 +16,15 @@ class MainViewModel : ViewModel() {
         return@map tasks.filter {!it.isDone}
             .sortedBy { it.id }
     }
-
-
+    private val sizeOfTasks = taskRepository.getSizeOfTasks()
 
 
     fun getTaskData(): LiveData<List<Task>> {
         return tasks
+    }
+
+    fun getSizeOfTasks(): LiveData<Int> {
+        return sizeOfTasks
     }
 
     fun addToDone(taskId: Int) {

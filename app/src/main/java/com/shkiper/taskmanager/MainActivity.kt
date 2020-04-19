@@ -1,13 +1,7 @@
 package com.shkiper.taskmanager
 
-import android.R.string
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -44,9 +38,6 @@ class MainActivity : AppCompatActivity() {
         add_task_btn.setOnClickListener {
             openDialog()
         }
-
-
-
     }
 
     private fun openDialog(){
@@ -56,11 +47,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    fun bindCounter(quantity: Int){
+        if(quantity == 0) tv_isEmpty.visibility = View.VISIBLE else tv_isEmpty.visibility = View.GONE
+        tv_doing.text = quantity.toString()
+    }
 
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
+        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
     }
 }

@@ -7,9 +7,13 @@ import androidx.lifecycle.MutableLiveData
 object TaskRepository {
     private val mutableList = mutableListOf<Task>()
     private val tasks = MutableLiveData(mutableList)
+    private val sizeOfTasks = MutableLiveData(0)
 
     fun loadChats() : LiveData<MutableList<Task>> {
         return tasks
+    }
+    fun getSizeOfTasks(): LiveData<Int> {
+        return sizeOfTasks
     }
 
     fun update(task: Task) {
@@ -24,6 +28,7 @@ object TaskRepository {
         val copy = tasks.value
         copy!!.add(task)
         tasks.value = copy
+        sizeOfTasks.value = tasks.value!!.size
     }
 
     fun nextChatId(): Int {

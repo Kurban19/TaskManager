@@ -7,12 +7,12 @@
     <string name="add_btn">Add</string>
     <string name="isEmpty_string">List is empty</string>
 
-
-    <string name="country_prompt">Choose a country</string>
+    <string name="zero_string">0</string>
 
     <string-array name="difficult_arrays">
         <item>Low</item>
         <item>Medium</item>
         <item>Hard</item>
     </string-array>
+
 </resources>

@@ -67,12 +67,10 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
             get() = itemView
 
         var title = itemView.findViewById<TextView>(R.id.tv_title)
-        //var indicator = itemView.findViewById<TextView?>(R.id.v_color)
 
         fun bind(item: Task){
 
             title.text = item.title
-            //indicator.text =  item.color
         }
     }
 }
