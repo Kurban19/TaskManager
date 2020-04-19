@@ -1,5 +1,6 @@
 package com.shkiper.taskmanager.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,7 +63,7 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
 
     inner class TaskViewHolder(convertView: View) : RecyclerView.ViewHolder(convertView),
-        LayoutContainer {
+        LayoutContainer, TaskItemTouchHelperCallback.ItemTouchViewHolder {
         override val containerView: View?
             get() = itemView
 
@@ -71,6 +72,14 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
         fun bind(item: Task){
 
             title.text = item.title
+        }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemCleared() {
+            itemView.setBackgroundColor(Color.WHITE)
         }
     }
 }

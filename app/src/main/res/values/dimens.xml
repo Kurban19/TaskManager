@@ -12,6 +12,8 @@
     <dimen name="spacing_small_8">8dp</dimen>
     <dimen name="spacing_tiny_4">4dp</dimen>
 
+    <dimen name="icon_size">24dp</dimen>
+
 
 
 </resources>

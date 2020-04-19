@@ -7,8 +7,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shkiper.taskmanager.adapters.TaskAdapter
+import com.shkiper.taskmanager.adapters.TaskItemTouchHelperCallback
 import com.shkiper.taskmanager.fragments.TaskDialogFragment
 import com.shkiper.taskmanager.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,6 +31,12 @@ class MainActivity : AppCompatActivity() {
     private fun initViews(){
         taskAdapter = TaskAdapter()
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val touchCallback = TaskItemTouchHelperCallback(taskAdapter){
+            viewModel.addToDone(it.id)
+        }
+        val touchHelper = ItemTouchHelper(touchCallback)
+        touchHelper.attachToRecyclerView(rv_task_list)
+
         with(rv_task_list){
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -47,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun bindCounter(quantity: Int){
+    private fun bindCounter(quantity: Int){
         if(quantity == 0) tv_isEmpty.visibility = View.VISIBLE else tv_isEmpty.visibility = View.GONE
         tv_doing.text = quantity.toString()
     }
