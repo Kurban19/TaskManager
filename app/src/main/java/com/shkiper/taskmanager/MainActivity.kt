@@ -60,10 +60,15 @@ class MainActivity : AppCompatActivity() {
         tv_doing.text = quantity.toString()
     }
 
+    private fun bindDoneCounter(quantity: Int){
+        tv_done.text = quantity.toString()
+    }
+
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
         viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
+        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
     }
 }

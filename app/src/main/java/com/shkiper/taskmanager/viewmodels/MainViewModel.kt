@@ -17,10 +17,15 @@ class MainViewModel : ViewModel() {
             .sortedBy { it.id }
     }
     private val sizeOfTasks = taskRepository.getSizeOfTasks()
+    private val sizeOfDoneTasks = taskRepository.getSizeOfDoneTasks()
 
 
     fun getTaskData(): LiveData<List<Task>> {
         return tasks
+    }
+
+    fun getSizeOfDoneTasks(): LiveData<Int>{
+        return sizeOfDoneTasks
     }
 
     fun getSizeOfTasks(): LiveData<Int> {

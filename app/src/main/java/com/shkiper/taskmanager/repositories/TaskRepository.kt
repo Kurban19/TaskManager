@@ -8,12 +8,16 @@ object TaskRepository {
     private val mutableList = mutableListOf<Task>()
     private val tasks = MutableLiveData(mutableList)
     private val sizeOfTasks = MutableLiveData(0)
+    private val sizeOfDoneTasks = MutableLiveData(0)
 
     fun loadChats() : LiveData<MutableList<Task>> {
         return tasks
     }
     fun getSizeOfTasks(): LiveData<Int> {
         return sizeOfTasks
+    }
+    fun getSizeOfDoneTasks(): LiveData<Int>{
+        return sizeOfDoneTasks
     }
 
     fun update(task: Task) {
@@ -22,6 +26,7 @@ object TaskRepository {
         if(ind == -1) return
         copy!![ind] = task
         tasks.value = copy
+        sizeOfDoneTasks.value = tasks.value!!.filter{ it.isDone }.size
     }
 
     fun add(task: Task) {
