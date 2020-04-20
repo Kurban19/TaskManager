@@ -12,12 +12,12 @@ import com.shkiper.taskmanager.repositories.TaskRepository
 class MainViewModel : ViewModel() {
 
     private val taskRepository = TaskRepository
+    private val sizeOfTasks = taskRepository.getSizeOfTasks()
+    private val sizeOfDoneTasks = taskRepository.getSizeOfDoneTasks()
     private val tasks = Transformations.map(taskRepository.loadChats()) { tasks ->
         return@map tasks.filter {!it.isDone}
             .sortedBy { it.id }
     }
-    private val sizeOfTasks = taskRepository.getSizeOfTasks()
-    private val sizeOfDoneTasks = taskRepository.getSizeOfDoneTasks()
 
 
     fun getTaskData(): LiveData<List<Task>> {

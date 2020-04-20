@@ -22,12 +22,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pie_chart"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:gravity="top|center_horizontal"
-            android:visibility="gone"/>
+        <com.ramijemli.percentagechartview.PercentageChartView
+            android:id="@+id/pie_progress"
+            android:layout_width="@dimen/pie_chart_size"
+            android:layout_height="@dimen/pie_chart_size"
+            app:pcv_mode="ring"
+            app:pcv_orientation="clockwise"
+            app:pcv_progress="45"
+            app:pcv_animDuration="800"
+            app:pcv_startAngle="90"
+            app:pcv_backgroundBarColor="@color/pie_background"
+            app:pcv_progressColor="@color/color_green"
+            app:pcv_animInterpolator="anticipate_overshoot"
+            android:layout_gravity="center_vertical|center_horizontal"/>
 
         <Button
             android:id="@+id/add_task_btn"
@@ -36,7 +43,8 @@
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/ic_add_black_40dp" />
+            android:background="@drawable/ic_add_black_70dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,6 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
+        tools:listitem="@layout/item_task_hard"
         />
 
     <TextView
@@ -93,6 +102,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
+        tools:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

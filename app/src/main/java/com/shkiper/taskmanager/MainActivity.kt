@@ -1,5 +1,6 @@
 package com.shkiper.taskmanager
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         initViewModel()
         initViews()
+        //setupChart()
+
     }
 
     private fun initViews(){
@@ -71,4 +74,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
         viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
     }
+
+//    private fun setupChart(){
+//
+//    }
+
 }

@@ -13,7 +13,7 @@
     <dimen name="spacing_tiny_4">4dp</dimen>
 
     <dimen name="icon_size">24dp</dimen>
-
+    <dimen name="pie_chart_size">240dp</dimen>
 
 
 </resources>
