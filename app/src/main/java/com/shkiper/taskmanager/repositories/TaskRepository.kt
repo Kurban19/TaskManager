@@ -1,24 +1,28 @@
 package com.shkiper.taskmanager.repositories
 
 import androidx.lifecycle.LiveData
-import com.shkiper.taskmanager.models.Task
 import androidx.lifecycle.MutableLiveData
+import com.shkiper.taskmanager.models.Task
 import com.shkiper.taskmanager.models.TaskType
+
 
 object TaskRepository {
     private val mutableList = mutableListOf<Task>(
         Task(1, "Do work", TaskType.HARD),
         Task(2, "Byu a bear", TaskType.LOW),
         Task(3, "Go to Bank", TaskType.MEDIUM),
-        Task(4, "Create a programm", TaskType.HARD)
+        Task(4, "Create a program", TaskType.HARD)
     )
     private val tasks = MutableLiveData(mutableList)
     private val sizeOfTasks = MutableLiveData(4)
     private val sizeOfDoneTasks = MutableLiveData(0)
 
+
+
     fun loadChats(): LiveData<MutableList<Task>> {
         return tasks
     }
+
 
     fun getSizeOfTasks(): LiveData<Int> {
         return sizeOfTasks

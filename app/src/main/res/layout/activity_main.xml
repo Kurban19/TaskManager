@@ -28,7 +28,7 @@
             android:layout_height="@dimen/pie_chart_size"
             app:pcv_mode="ring"
             app:pcv_orientation="clockwise"
-            app:pcv_progress="45"
+            tools:pcv_progress="45"
             app:pcv_animDuration="800"
             app:pcv_startAngle="90"
             app:pcv_backgroundBarColor="@color/pie_background"
