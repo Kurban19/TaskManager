@@ -10,30 +10,10 @@ class MainViewModel : ViewModel() {
     private val taskRepository = TaskRepository
     private val sizeOfTasks = taskRepository.getSizeOfTasks()
     private val sizeOfDoneTasks = taskRepository.getSizeOfDoneTasks()
-    //private val percentOfDone = MutableLiveData(Utils.percentOfDone(sizeOfDoneTasks.value!!, sizeOfTasks.value!!))
-    private var mediatorLiveData = MediatorLiveData<Int>()
     private val tasks = Transformations.map(taskRepository.loadChats()) { tasks ->
         return@map tasks.filter {!it.isDone}
             .sortedBy { it.id }
     }
-
-    init {
-        mediatorLiveData.addSource(sizeOfDoneTasks) {
-            mediatorLiveData.value = sizeOfDoneTasks.value
-        }
-
-        mediatorLiveData.addSource(sizeOfTasks){
-            mediatorLiveData.value = sizeOfTasks.value
-        }
-    }
-
-    fun getMediatorLiveData(): MediatorLiveData<Int> {
-        return mediatorLiveData
-    }
-
-//    fun getPercentOfDone(): LiveData<Int> {
-//        return percentOfDone
-//    }
 
 
     fun getTaskData(): LiveData<List<Task>> {
@@ -52,6 +32,12 @@ class MainViewModel : ViewModel() {
         val task = taskRepository.find(taskId)
         task ?: return
         taskRepository.update(task.copy(isDone = true))
+    }
+
+    fun restoreFromDone(taskId: Int) {
+        val task = taskRepository.find(taskId)
+        task ?: return
+        taskRepository.update(task.copy(isDone = false))
     }
 
 }
