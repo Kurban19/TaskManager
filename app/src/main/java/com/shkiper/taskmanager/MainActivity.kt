@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.shkiper.taskmanager.adapters.TaskAdapter
 import com.shkiper.taskmanager.adapters.TaskItemTouchHelperCallback
 import com.shkiper.taskmanager.fragments.TaskDialogFragment
+import com.shkiper.taskmanager.repositories.TaskRepository
 import com.shkiper.taskmanager.utils.Utils
 import com.shkiper.taskmanager.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -56,6 +57,10 @@ class MainActivity : AppCompatActivity() {
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(divider)
+        }
+
+        btn_clear.setOnClickListener{
+            TaskRepository.clearData()
         }
 
         fab.setOnClickListener {

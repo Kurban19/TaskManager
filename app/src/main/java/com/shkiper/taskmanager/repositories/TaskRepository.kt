@@ -7,16 +7,9 @@ import com.shkiper.taskmanager.models.TaskType
 
 
 object TaskRepository {
-    private val mutableList = mutableListOf<Task>(
-//        Task(1, "Do work", TaskType.HARD),
-//        Task(2, "Byu a bear", TaskType.LOW),
-//        Task(3, "Go to Bank", TaskType.MEDIUM),
-//        Task(4, "Create a program", TaskType.HARD)
-    )
-    private val tasks = MutableLiveData(mutableList)
+    private val tasks = MutableLiveData(mutableListOf<Task>())
     private val sizeOfTasks = MutableLiveData(0)
     private val sizeOfDoneTasks = MutableLiveData(0)
-
 
 
     fun loadChats(): LiveData<MutableList<Task>> {
@@ -30,6 +23,12 @@ object TaskRepository {
 
     fun getSizeOfDoneTasks(): LiveData<Int> {
         return sizeOfDoneTasks
+    }
+
+    fun clearData(){
+        tasks.value = mutableListOf<Task>()
+        sizeOfDoneTasks.value = 0
+        sizeOfTasks.value = 0
     }
 
     fun update(task: Task) {
