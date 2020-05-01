@@ -1,3 +1,4 @@
+
 package com.shkiper.taskmanager
 
 import android.os.Bundle
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = TaskItemTouchHelperCallback(taskAdapter){
             val id = it.id
-            viewModel.addToDone(id)
+                viewModel.addToDone(id)
             val snackBar: Snackbar = Snackbar.make(rv_task_list, "${it.title} is done", Snackbar.LENGTH_LONG)
             snackBar.setAction("Undo"){
                 viewModel.restoreFromDone(id)
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             addItemDecoration(divider)
         }
 
-        add_task_btn.setOnClickListener {
+        fab.setOnClickListener {
             openDialog()
         }
     }

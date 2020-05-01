@@ -1,9 +1,8 @@
 package com.shkiper.taskmanager.viewmodels
-
 import androidx.lifecycle.*
 import com.shkiper.taskmanager.models.Task
 import com.shkiper.taskmanager.repositories.TaskRepository
-import com.shkiper.taskmanager.utils.Utils
+
 
 class MainViewModel : ViewModel() {
 
