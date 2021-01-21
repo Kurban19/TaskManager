@@ -8,11 +8,11 @@ class TaskBaseHelper(context: Context) : SQLiteOpenHelper(context, "taskBase.db"
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
-            "create table " + TaskDbSchema.CrimeTable.NAME.toString() + "(" +
+            "create table " + TaskDbSchema.CrimeTable.NAME + "(" +
                     " _id integer primary key autoincrement, " +
-                    TaskDbSchema.CrimeTable.Cols.ID.toString() + ", " +
-                    TaskDbSchema.CrimeTable.Cols.TITLE.toString() + ", " +
-                    TaskDbSchema.CrimeTable.Cols.DONE.toString()  +
+                    TaskDbSchema.CrimeTable.Cols.ID + ", " +
+                    TaskDbSchema.CrimeTable.Cols.TITLE + ", " +
+                    TaskDbSchema.CrimeTable.Cols.DONE +
                     ")"
         )
     }
