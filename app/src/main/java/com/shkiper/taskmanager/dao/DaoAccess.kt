@@ -12,12 +12,12 @@ import com.shkiper.taskmanager.models.Task
 
 interface DaoAccess {
 
-    @Insert
-    fun insertTask(task: Task): Long?
-
-
     @Query("SELECT * FROM Task ORDER BY taskId")
     fun fetchAllTasks(): LiveData<List<Task?>?>?
+
+
+    @Insert
+    fun insertTask(task: Task): Long?
 
 
     @Query("SELECT * FROM Task WHERE taskId =:taskId")

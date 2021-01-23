@@ -11,7 +11,7 @@ class MainViewModel : ViewModel() {
     private val sizeOfDoneTasks = taskRepository.getSizeOfDoneTasks()
     private val tasks = Transformations.map(taskRepository.loadChats()) { tasks ->
         return@map tasks.filter {!it.isDone}
-            .sortedBy { it.id }
+            .sortedBy { it.taskId }
     }
 
 
