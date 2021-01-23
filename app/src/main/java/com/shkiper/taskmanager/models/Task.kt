@@ -1,9 +1,13 @@
 package com.shkiper.taskmanager.models
 
-import java.util.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 data class Task(
-    val id: Int,
+    @PrimaryKey(autoGenerate = true)
+    val taskId: Int,
+
     var title: String,
     val taskType: TaskType = TaskType.LOW,
     var isDone: Boolean = false
