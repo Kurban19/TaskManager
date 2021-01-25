@@ -10,7 +10,7 @@ class MainViewModel : ViewModel() {
     private val sizeOfTasks = taskRepository.getSizeOfTasks()
     private val sizeOfDoneTasks = taskRepository.getSizeOfDoneTasks()
     private val tasks = Transformations.map(taskRepository.loadChats()) { tasks ->
-        return@map tasks.filter {!it.isDone}
+        return@map tasks.filter {!it.isComplete}
             .sortedBy { it.taskId }
     }
 
@@ -30,13 +30,13 @@ class MainViewModel : ViewModel() {
     fun addToDone(taskId: Int) {
         val task = taskRepository.find(taskId)
         task ?: return
-        taskRepository.update(task.copy(isDone = true))
+        taskRepository.update(task.copy(isComplete = true))
     }
 
     fun restoreFromDone(taskId: Int) {
         val task = taskRepository.find(taskId)
         task ?: return
-        taskRepository.update(task.copy(isDone = false))
+        taskRepository.update(task.copy(isComplete = false))
     }
 
 

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         taskAdapter = TaskAdapter()
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = TaskItemTouchHelperCallback(taskAdapter){
-            val id = it.id
+            val id = it.taskId
                 viewModel.addToDone(id)
             val snackBar: Snackbar = Snackbar.make(rv_task_list, "${it.title} is done", Snackbar.LENGTH_LONG)
             snackBar.setAction("Undo"){

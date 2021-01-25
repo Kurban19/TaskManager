@@ -6,14 +6,9 @@ import com.shkiper.taskmanager.models.TaskType
 class TaskTypeConverter {
 
     @TypeConverter
-    fun toType(value: String): TaskType {
-        return TaskType.valueOf(value)
-    }
+    fun toType(value: String) = enumValueOf<TaskType>(value)
 
     @TypeConverter
-    fun fromType(value: TaskType): String {
-        return value.name
-    }
-
+    fun fromHealth(value: TaskType) = value.name
 
 }

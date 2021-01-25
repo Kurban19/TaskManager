@@ -3,7 +3,6 @@ package com.shkiper.taskmanager.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.shkiper.taskmanager.models.Task
-import com.shkiper.taskmanager.models.TaskType
 
 
 object TaskRepository {
@@ -37,7 +36,7 @@ object TaskRepository {
         if (ind == -1) return
         copy!![ind] = task
         tasks.value = copy
-        sizeOfDoneTasks.value = tasks.value!!.filter { it.isDone }.size
+        sizeOfDoneTasks.value = tasks.value!!.filter { it.isComplete }.size
     }
 
     fun add(task: Task) {

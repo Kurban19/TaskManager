@@ -1,8 +1,7 @@
 package com.shkiper.taskmanager.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.shkiper.taskmanager.utils.TaskTypeConverter
 
 @Entity
 data class Task(
@@ -11,14 +10,17 @@ data class Task(
 
     @ColumnInfo(name = "title")
     var title: String,
+
     @ColumnInfo(name = "task_type")
+    @TypeConverters(TaskTypeConverter::class)
     val taskType: TaskType = TaskType.LOW,
 
-    var isDone: Boolean = false
+    @ColumnInfo(name = "is_complete")
+    var isComplete: Boolean = false
 ) {
 }
-enum class TaskType{
-    HARD,
-    MEDIUM,
-    LOW
+enum class TaskType(val value: Int){
+    HARD(0),
+    MEDIUM(1),
+    LOW(2)
 }
