@@ -1,58 +1,56 @@
 package com.shkiper.taskmanager.repositories
 
+import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.os.AsyncTask
+import com.shkiper.taskmanager.dao.DaoAccess
+import com.shkiper.taskmanager.db.TaskDataBase
 import com.shkiper.taskmanager.models.Task
 
 
-object TaskRepository {
-    private val tasks = MutableLiveData(mutableListOf<Task>())
-    private val sizeOfTasks = MutableLiveData(0)
-    private val sizeOfDoneTasks = MutableLiveData(0)
+open class TaskRepository(context: Context) {
+
+    private lateinit var taskDao: DaoAccess
+    private lateinit var tasks: LiveData<List<Task>>
 
 
-    fun loadChats(): LiveData<MutableList<Task>> {
+    init {
+        TaskDataBase.getInstance(context)?.let {
+            taskDao = it.getDaoAccess()
+            tasks = taskDao.fetchAllTasks()
+        }
+    }
+
+    fun loadChats(): LiveData<List<Task>> {
         return tasks
     }
 
-
-    fun getSizeOfTasks(): LiveData<Int> {
-        return sizeOfTasks
+    fun insert(task: Task) {
+        DoInBackgroundAsync<Task> {
+            taskDao.insertTask(task)
+        }.execute()
     }
 
-    fun getSizeOfDoneTasks(): LiveData<Int> {
-        return sizeOfDoneTasks
+
+    fun deleteTask(task: Task) {
+        DoInBackgroundAsync<Task> {
+            taskDao.deleteTask(task)
+        }.execute()
     }
 
-    fun clearData(){
-        tasks.value = mutableListOf<Task>()
-        sizeOfDoneTasks.value = 0
-        sizeOfTasks.value = 0
+    fun updateNote(task: Task) {
+        DoInBackgroundAsync<Task> {
+            taskDao.updateTask(task)
+        }.execute()
     }
 
-    fun update(task: Task) {
-        val copy = tasks.value
-        val ind = tasks.value!!.indexOfFirst { it.id == task.id }
-        if (ind == -1) return
-        copy!![ind] = task
-        tasks.value = copy
-        sizeOfDoneTasks.value = tasks.value!!.filter { it.isComplete }.size
-    }
 
-    fun add(task: Task) {
-        val copy = tasks.value
-        copy!!.add(task)
-        tasks.value = copy
-        sizeOfTasks.value = tasks.value!!.size
-    }
-
-    fun nextChatId(): Int {
-        return tasks.value!!.size
-    }
-
-    fun find(taskId: Int): Task? {
-        val ind = tasks.value!!.indexOfFirst { it.id == taskId }
-        return tasks.value!!.getOrNull(ind)
+    private class DoInBackgroundAsync<T : Any>(
+        private val backgroundTask: () -> Unit
+    ) : AsyncTask<T, Unit, Unit>() {
+        override fun doInBackground(vararg params: T) {
+            backgroundTask.invoke()
+        }
     }
 
 }

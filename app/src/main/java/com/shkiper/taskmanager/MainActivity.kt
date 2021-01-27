@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         initViewModel()
         initViews()
+
     }
 
     private fun initViews(){
@@ -59,9 +60,9 @@ class MainActivity : AppCompatActivity() {
             addItemDecoration(divider)
         }
 
-        btn_clear.setOnClickListener{
-            TaskRepository.clearData()
-        }
+//        btn_clear.setOnClickListener{
+//            TaskRepository.clearData()
+//        }
 
         fab.setOnClickListener {
             openDialog()
@@ -76,27 +77,27 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun bindCounter(quantity: Int){
-        if(quantity == 0) tv_isEmpty.visibility = View.VISIBLE else tv_isEmpty.visibility = View.GONE
-        tv_doing.text = quantity.toString()
-        sizeOfTasks = quantity
-        pie_progress.setProgress(Utils.percentOfDone(sizeOfDoneTasks, quantity).toFloat(), true)
-    }
-
-    private fun bindDoneCounter(quantity: Int){
-        if(quantity == sizeOfTasks) tv_isEmpty.visibility = View.VISIBLE else tv_isEmpty.visibility = View.GONE
-        tv_done.text = quantity.toString()
-        sizeOfDoneTasks = quantity
-        pie_progress.setProgress(Utils.percentOfDone(quantity, sizeOfTasks).toFloat(), true)
-    }
+//    private fun bindCounter(quantity: Int){
+//        if(quantity == 0) tv_isEmpty.visibility = View.VISIBLE else tv_isEmpty.visibility = View.GONE
+//        tv_doing.text = quantity.toString()
+//        sizeOfTasks = quantity
+//        pie_progress.setProgress(Utils.percentOfDone(sizeOfDoneTasks, quantity).toFloat(), true)
+//    }
+//
+//    private fun bindDoneCounter(quantity: Int){
+//        if(quantity == sizeOfTasks) tv_isEmpty.visibility = View.VISIBLE else tv_isEmpty.visibility = View.GONE
+//        tv_done.text = quantity.toString()
+//        sizeOfDoneTasks = quantity
+//        pie_progress.setProgress(Utils.percentOfDone(quantity, sizeOfTasks).toFloat(), true)
+//    }
 
 
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
-        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
-        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
+//        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
+//        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
     }
 
 
