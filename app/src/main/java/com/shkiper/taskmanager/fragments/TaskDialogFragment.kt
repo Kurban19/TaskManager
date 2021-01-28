@@ -27,8 +27,8 @@ class TaskDialogFragment : DialogFragment() {
         // Do all the stuff to initialize your custom view
         val view = inflater.inflate(R.layout.add_task_dialog, container, false)
         view.findViewById<Button>(R.id.btn_add).setOnClickListener{
-            val task = Task(TaskRepository.nextChatId(), et_title.text.toString(), Utils.toTaskType(spinner.selectedItem.toString()))
-            TaskRepository.add(task)
+//            val task = Task(TaskRepository.nextChatId(), et_title.text.toString(), Utils.toTaskType(spinner.selectedItem.toString()))
+//            TaskRepository.add(task)
             dismiss()
         }
         view.findViewById<Button>(R.id.btn_cancel).setOnClickListener{

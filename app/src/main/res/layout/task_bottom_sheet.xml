@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_rounded_shape"
+    android:minWidth="300dp"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/wr_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/closeImageView">
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal_16"
+            android:hint="@string/task_hint"
+            android:singleLine="true"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/tv_difficult"
+        android:textSize="@dimen/font_normal_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal_16"
+        android:text="@string/difficult_string"
+        android:layout_below="@id/wr_title"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/spacing_tiny_4"
+        android:layout_marginEnd="@dimen/spacing_normal_16"
+        android:entries="@array/difficult_arrays"
+        android:layout_below="@id/tv_difficult"/>
+
+
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginTop="@dimen/spacing_normal_16"
+        android:text="@string/add_btn"
+        android:background="@drawable/btn_ripple"
+        android:layout_below="@id/spinner"
+        android:layout_alignParentEnd="true"
+        />
+
+
+</RelativeLayout>

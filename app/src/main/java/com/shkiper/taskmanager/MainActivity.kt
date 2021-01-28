@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,6 +18,7 @@ import com.shkiper.taskmanager.adapters.TaskAdapter
 import com.shkiper.taskmanager.adapters.TaskItemTouchHelperCallback
 import com.shkiper.taskmanager.fragments.TaskDialogFragment
 import com.shkiper.taskmanager.repositories.TaskRepository
+import com.shkiper.taskmanager.utils.MyViewModelFactory
 import com.shkiper.taskmanager.utils.Utils
 import com.shkiper.taskmanager.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,10 +46,10 @@ class MainActivity : AppCompatActivity() {
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = TaskItemTouchHelperCallback(taskAdapter){
             val id = it.taskId
-                viewModel.addToDone(id)
+//                viewModel.addToDone(id)
             val snackBar: Snackbar = Snackbar.make(rv_task_list, "${it.title} is done", Snackbar.LENGTH_LONG)
             snackBar.setAction("Undo"){
-                viewModel.restoreFromDone(id)
+//                viewModel.restoreFromDone(id)
             }
             snackBar.show()
         }
@@ -94,7 +96,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, MyViewModelFactory(TaskRepository(this))).get(MainViewModel::class.java)
         viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
 //        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
 //        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })

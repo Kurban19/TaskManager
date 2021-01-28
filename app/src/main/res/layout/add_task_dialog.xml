@@ -29,7 +29,7 @@
         android:layout_marginStart="@dimen/spacing_normal_16"
         android:layout_marginTop="@dimen/spacing_normal_16"
         android:layout_marginEnd="@dimen/spacing_normal_16"
-        android:hint="@string/task_name"
+        android:hint="@string/task_hint"
         android:singleLine="true"/>
 
     </com.google.android.material.textfield.TextInputLayout>
