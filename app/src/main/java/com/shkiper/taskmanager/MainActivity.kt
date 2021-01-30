@@ -1,6 +1,8 @@
 
 package com.shkiper.taskmanager
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,6 +20,7 @@ import com.shkiper.taskmanager.adapters.TaskAdapter
 import com.shkiper.taskmanager.adapters.TaskItemTouchHelperCallback
 import com.shkiper.taskmanager.fragments.TaskDialogFragment
 import com.shkiper.taskmanager.fragments.TaskSheetDialog
+import com.shkiper.taskmanager.models.Task
 import com.shkiper.taskmanager.repositories.TaskRepository
 import com.shkiper.taskmanager.utils.MyViewModelFactory
 import com.shkiper.taskmanager.utils.Utils
@@ -26,7 +29,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_task_dialog.*
 
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MainActivity : AppCompatActivity() {
+    companion object {
+        const val TITLE_TASK_TAG = "TITLE_TASK"
+        const val TYPE_TASK_TAG = "TYPE_TASK"
+    }
+
+
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var viewModel: MainViewModel
     private var sizeOfDoneTasks: Int = 0
@@ -103,5 +113,17 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK){
+            data?.let {
+                val task = Task(
+                        it.getStringExtra(TITLE_TASK_TAG),
+                        Utils.toTaskType(it.getStringExtra(TYPE_TASK_TAG))
+                )
+                viewModel.insertTask(task)
+                taskAdapter.notifyDataSetChanged()
+            }
+        }
+    }
 }

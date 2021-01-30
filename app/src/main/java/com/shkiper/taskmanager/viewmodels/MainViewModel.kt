@@ -16,6 +16,10 @@ class MainViewModel(private val taskRepository: TaskRepository) : ViewModel() {
         return tasks
     }
 
+    fun insertTask(task: Task){
+        taskRepository.insert(task)
+    }
+
 
 //    fun addToDone(taskId: Int) {
 //        val task = taskRepository.find(taskId)

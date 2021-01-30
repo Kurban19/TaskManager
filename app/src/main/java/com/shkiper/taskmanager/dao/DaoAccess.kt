@@ -12,7 +12,7 @@ interface DaoAccess {
 
 
     @Insert
-    fun insertTask(task: Task): Long?
+    fun insertTask(task: Task)
 
 
     @Query("SELECT * FROM Task WHERE taskId =:taskId")

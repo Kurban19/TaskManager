@@ -1,13 +1,14 @@
 package com.shkiper.taskmanager.utils
 
-import com.shkiper.taskmanager.models.TaskType
+import com.shkiper.taskmanager.models.Task
+
 
 object Utils {
 
     fun toTaskType(string: String) = when(string){
-        "Low" -> TaskType.LOW
-        "Medium" -> TaskType.MEDIUM
-        else -> TaskType.HARD
+        "Low" -> Task.TaskType.LOW
+        "Medium" -> Task.TaskType.MEDIUM
+        else -> Task.TaskType.HARD
     }
 
     //Calculating percent of done and not done tasks for pie chart

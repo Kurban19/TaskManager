@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shkiper.taskmanager.R
 import com.shkiper.taskmanager.models.Task
-import com.shkiper.taskmanager.models.TaskType
 import kotlinx.android.extensions.LayoutContainer
 
 
@@ -23,9 +22,9 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     var items: List<Task> = listOf()
 
     override fun getItemViewType(position: Int): Int = when(items[position].taskType){
-        TaskType.LOW -> LOW_TYPE
-        TaskType.MEDIUM -> MEDIUM_TYPE
-        TaskType.HARD -> HARD_TYPE
+        Task.TaskType.LOW -> LOW_TYPE
+        Task.TaskType.MEDIUM -> MEDIUM_TYPE
+        Task.TaskType.HARD -> HARD_TYPE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {

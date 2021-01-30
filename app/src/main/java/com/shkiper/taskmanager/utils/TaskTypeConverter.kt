@@ -1,14 +1,15 @@
 package com.shkiper.taskmanager.utils
 
 import androidx.room.TypeConverter
-import com.shkiper.taskmanager.models.TaskType
+import com.shkiper.taskmanager.models.Task
+
 
 class TaskTypeConverter {
 
     @TypeConverter
-    fun toType(value: String) = enumValueOf<TaskType>(value)
+    fun toTaskType(value: String) = enumValueOf<Task.TaskType>(value)
 
     @TypeConverter
-    fun fromHealth(value: TaskType) = value.name
+    fun fromTaskType(value: Task.TaskType) = value.name
 
 }

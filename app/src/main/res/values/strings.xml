@@ -8,6 +8,7 @@
     <string name="isEmpty_string">List is empty</string>
 
     <string name="zero_string">0</string>
+    <string name="empty_title_error">Title of task is empty</string>
 
     <string-array name="difficult_arrays">
         <item>Low</item>
