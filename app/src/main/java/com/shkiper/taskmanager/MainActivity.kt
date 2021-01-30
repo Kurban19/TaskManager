@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.shkiper.taskmanager.adapters.TaskAdapter
 import com.shkiper.taskmanager.adapters.TaskItemTouchHelperCallback
 import com.shkiper.taskmanager.fragments.TaskDialogFragment
+import com.shkiper.taskmanager.fragments.TaskSheetDialog
 import com.shkiper.taskmanager.repositories.TaskRepository
 import com.shkiper.taskmanager.utils.MyViewModelFactory
 import com.shkiper.taskmanager.utils.Utils
@@ -74,9 +75,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun openDialog(){
         val fm: FragmentManager = supportFragmentManager
-        val taskDialog = TaskDialogFragment()
+        val taskDialog = TaskSheetDialog()
         taskDialog.show(fm, "")
-
     }
 
 //    private fun bindCounter(quantity: Int){

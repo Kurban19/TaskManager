@@ -46,7 +46,7 @@ class TaskAdapter(): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     fun updateData(data: List<Task>){
 
         val diffCallback = object : DiffUtil.Callback(){
-            override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean = items[oldPos].id == data[newPos].id
+            override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean = items[oldPos].taskId == data[newPos].taskId
 
             override fun getOldListSize(): Int = items.size
 
