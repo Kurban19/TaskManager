@@ -3,6 +3,7 @@ package com.shkiper.taskmanager.repositories
 import android.content.Context
 import androidx.lifecycle.LiveData
 import android.os.AsyncTask
+import android.util.Log
 import com.shkiper.taskmanager.dao.DaoAccess
 import com.shkiper.taskmanager.db.TaskDataBase
 import com.shkiper.taskmanager.models.Task
@@ -29,6 +30,8 @@ open class TaskRepository(context: Context) {
         DoInBackgroundAsync<Task> {
             taskDao.insertTask(task)
         }.execute()
+
+        Log.d("TAG", "size of tasks -> ${tasks.value?.size}")
     }
 
 

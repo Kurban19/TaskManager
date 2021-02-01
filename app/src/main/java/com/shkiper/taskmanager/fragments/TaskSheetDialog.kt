@@ -10,6 +10,8 @@ import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.shkiper.taskmanager.MainActivity
 import com.shkiper.taskmanager.R
+import com.shkiper.taskmanager.models.Task
+import com.shkiper.taskmanager.utils.Utils
 import kotlinx.android.synthetic.main.task_bottom_sheet.*
 
 class TaskSheetDialog : BottomSheetDialogFragment() {
@@ -31,7 +33,8 @@ class TaskSheetDialog : BottomSheetDialogFragment() {
 
         btn_add.setOnClickListener{
             if(et_title.text.isNotEmpty()){
-                addTask()
+                val task = Task(et_title.text.toString(), Utils.toTaskType(spinner.selectedItem.toString()))
+                (activity as MainActivity?)!!.addTask(task)
             }
             else{
                 Toast.makeText(activity, getString(R.string.empty_title_error), Toast.LENGTH_LONG).show()
@@ -40,14 +43,4 @@ class TaskSheetDialog : BottomSheetDialogFragment() {
 
     }
 
-
-    private fun addTask(){
-        val data = Intent().apply {
-            putExtra(MainActivity.TITLE_TASK_TAG, et_title.text.toString())
-            putExtra(MainActivity.TYPE_TASK_TAG, spinner.selectedItem.toString())
-        }
-
-        activity?.setResult(Activity.RESULT_OK, data)
-        dismiss()
-    }
 }

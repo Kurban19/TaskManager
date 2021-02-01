@@ -1,6 +1,5 @@
 package com.shkiper.taskmanager.utils
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.shkiper.taskmanager.repositories.TaskRepository
