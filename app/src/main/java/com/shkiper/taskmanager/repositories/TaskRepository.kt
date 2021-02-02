@@ -41,9 +41,15 @@ open class TaskRepository(context: Context) {
         }.execute()
     }
 
-    fun updateNote(task: Task) {
+    fun updateTask(task: Task) {
         DoInBackgroundAsync<Task> {
             taskDao.updateTask(task)
+        }.execute()
+    }
+
+    fun deleteAll(){
+        DoInBackgroundAsync<Task>{
+            taskDao.deleteAll()
         }.execute()
     }
 

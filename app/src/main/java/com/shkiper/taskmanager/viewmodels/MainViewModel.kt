@@ -21,17 +21,19 @@ class MainViewModel(private val taskRepository: TaskRepository) : ViewModel() {
     }
 
 
-//    fun addToDone(taskId: Int) {
-//        val task = taskRepository.find(taskId)
-//        task ?: return
-//        taskRepository.update(task.copy(isComplete = true))
-//    }
-//
-//    fun restoreFromDone(taskId: Int) {
-//        val task = taskRepository.find(taskId)
-//        task ?: return
-//        taskRepository.update(task.copy(isComplete = false))
-//    }
+    fun addToDone(task: Task) {
+        task.isComplete = true
+        taskRepository.updateTask(task)
+    }
+
+    fun restoreFromDone(task: Task) {
+        task.isComplete = false
+        taskRepository.updateTask(task)
+    }
+
+    fun deleteAll(){
+        taskRepository.deleteAll()
+    }
 
 
 

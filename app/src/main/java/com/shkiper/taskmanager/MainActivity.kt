@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_task_dialog.*
 
 
-@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class MainActivity : AppCompatActivity() {
 
 
@@ -44,11 +43,11 @@ class MainActivity : AppCompatActivity() {
         taskAdapter = TaskAdapter()
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallback = TaskItemTouchHelperCallback(taskAdapter){
-            val id = it.taskId
-//                viewModel.addToDone(id)
+            val task = it
+            viewModel.addToDone(task)
             val snackBar: Snackbar = Snackbar.make(rv_task_list, "${it.title} is done", Snackbar.LENGTH_LONG)
             snackBar.setAction("Undo"){
-//                viewModel.restoreFromDone(id)
+                viewModel.restoreFromDone(task)
             }
             snackBar.show()
         }
@@ -61,15 +60,14 @@ class MainActivity : AppCompatActivity() {
             addItemDecoration(divider)
         }
 
-//        btn_clear.setOnClickListener{
-//            TaskRepository.clearData()
-//        }
+        btn_clear.setOnClickListener{
+            viewModel.deleteAll()
+        }
 
         fab.setOnClickListener {
             openDialog()
         }
     }
-
 
     private fun openDialog(){
         val fm: FragmentManager = supportFragmentManager
@@ -91,8 +89,6 @@ class MainActivity : AppCompatActivity() {
 //        pie_progress.setProgress(Utils.percentOfDone(quantity, sizeOfTasks).toFloat(), true)
 //    }
 
-
-
     private fun initViewModel() {
         viewModel = ViewModelProvider(this, MyViewModelFactory(TaskRepository(this))).get(MainViewModel::class.java)
         viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
@@ -104,6 +100,5 @@ class MainActivity : AppCompatActivity() {
     fun addTask(task: Task){
         viewModel.insertTask(task)
     }
-
 
 }

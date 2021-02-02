@@ -1,7 +1,5 @@
 package com.shkiper.taskmanager.fragments
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +33,7 @@ class TaskSheetDialog : BottomSheetDialogFragment() {
             if(et_title.text.isNotEmpty()){
                 val task = Task(et_title.text.toString(), Utils.toTaskType(spinner.selectedItem.toString()))
                 (activity as MainActivity?)!!.addTask(task)
+                dismiss()
             }
             else{
                 Toast.makeText(activity, getString(R.string.empty_title_error), Toast.LENGTH_LONG).show()

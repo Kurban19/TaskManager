@@ -10,6 +10,9 @@ interface DaoAccess {
     @Query("SELECT * FROM Task")
     fun fetchAllTasks(): LiveData<List<Task>>
 
+    @Query("DELETE FROM Task")
+    fun deleteAll()
+
 
     @Insert
     fun insertTask(task: Task)
