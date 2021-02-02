@@ -2,6 +2,7 @@
 package com.shkiper.taskmanager
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ import com.shkiper.taskmanager.fragments.TaskSheetDialog
 import com.shkiper.taskmanager.models.Task
 import com.shkiper.taskmanager.repositories.TaskRepository
 import com.shkiper.taskmanager.utils.MyViewModelFactory
+import com.shkiper.taskmanager.utils.Utils
 import com.shkiper.taskmanager.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_task_dialog.*
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             }
             snackBar.show()
         }
+
         val touchHelper = ItemTouchHelper(touchCallback)
         touchHelper.attachToRecyclerView(rv_task_list)
 
@@ -67,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             openDialog()
         }
+
     }
 
     private fun openDialog(){
@@ -75,25 +79,23 @@ class MainActivity : AppCompatActivity() {
         taskDialog.show(fm, "Open Dialog")
     }
 
-//    private fun bindCounter(quantity: Int){
-//        if(quantity == 0) tv_isEmpty.visibility = View.VISIBLE else tv_isEmpty.visibility = View.GONE
-//        tv_doing.text = quantity.toString()
-//        sizeOfTasks = quantity
-//        pie_progress.setProgress(Utils.percentOfDone(sizeOfDoneTasks, quantity).toFloat(), true)
-//    }
-//
-//    private fun bindDoneCounter(quantity: Int){
-//        if(quantity == sizeOfTasks) tv_isEmpty.visibility = View.VISIBLE else tv_isEmpty.visibility = View.GONE
-//        tv_done.text = quantity.toString()
-//        sizeOfDoneTasks = quantity
-//        pie_progress.setProgress(Utils.percentOfDone(quantity, sizeOfTasks).toFloat(), true)
-//    }
+    private fun bindCounter(quantity: Int){
+        tv_doing.text = quantity.toString()
+        sizeOfTasks = quantity
+        pie_progress.setProgress(Utils.percentOfDone(sizeOfDoneTasks, quantity).toFloat(), true)
+    }
+
+    private fun bindDoneCounter(quantity: Int){
+        tv_done.text = quantity.toString()
+        sizeOfDoneTasks = quantity
+        pie_progress.setProgress(Utils.percentOfDone(quantity, sizeOfTasks).toFloat(), true)
+    }
 
     private fun initViewModel() {
         viewModel = ViewModelProvider(this, MyViewModelFactory(TaskRepository(this))).get(MainViewModel::class.java)
         viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
-//        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
-//        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
+        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
+        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
     }
 
 

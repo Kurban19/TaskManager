@@ -1,4 +1,5 @@
 package com.shkiper.taskmanager.viewmodels
+
 import androidx.lifecycle.*
 import com.shkiper.taskmanager.models.Task
 import com.shkiper.taskmanager.repositories.TaskRepository
@@ -8,8 +9,10 @@ class MainViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 
     private val tasks = Transformations.map(taskRepository.loadChats()) { tasks ->
         return@map tasks.filter {!it.isComplete}
-            .sortedBy { it.taskId }
     }
+
+    private val taskDoneSizeInt = MutableLiveData(taskRepository.loadChats().value?.filter {it.isComplete}?.size ?: 0)
+    private val taskSizeInt = MutableLiveData(taskRepository.loadChats().value?.filter {!it.isComplete}?.size ?: 0)
 
 
     fun getTaskData(): LiveData<List<Task>> {
@@ -35,6 +38,13 @@ class MainViewModel(private val taskRepository: TaskRepository) : ViewModel() {
         taskRepository.deleteAll()
     }
 
+    fun getSizeOfTasks(): MutableLiveData<Int> {
+        return taskSizeInt
+    }
+
+    fun getSizeOfDoneTasks(): MutableLiveData<Int> {
+        return taskDoneSizeInt
+    }
 
 
 }
