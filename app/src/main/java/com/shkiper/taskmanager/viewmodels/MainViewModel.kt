@@ -7,12 +7,12 @@ import com.shkiper.taskmanager.repositories.TaskRepository
 
 class MainViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 
-    private val tasks = Transformations.map(taskRepository.loadChats()) { tasks ->
+    private val tasks = Transformations.map(taskRepository.loadTasks()) { tasks ->
         return@map tasks.filter {!it.isComplete}
     }
 
-    private val taskDoneSizeInt = MutableLiveData(taskRepository.loadChats().value?.filter {it.isComplete}?.size ?: 0)
-    private val taskSizeInt = MutableLiveData(taskRepository.loadChats().value?.filter {!it.isComplete}?.size ?: 0)
+    private val taskDoneSizeInt = MutableLiveData(0)
+    private val taskSizeInt = MutableLiveData(0)
 
 
     fun getTaskData(): LiveData<List<Task>> {

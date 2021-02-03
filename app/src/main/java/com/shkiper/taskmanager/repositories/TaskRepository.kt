@@ -22,7 +22,7 @@ open class TaskRepository(context: Context) {
         }
     }
 
-    fun loadChats(): LiveData<List<Task>> {
+    fun loadTasks(): LiveData<List<Task>> {
         return tasks
     }
 

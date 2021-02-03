@@ -94,10 +94,9 @@ class MainActivity : AppCompatActivity() {
     private fun initViewModel() {
         viewModel = ViewModelProvider(this, MyViewModelFactory(TaskRepository(this))).get(MainViewModel::class.java)
         viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
-        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
-        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
+//        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
+//        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
     }
-
 
     fun addTask(task: Task){
         viewModel.insertTask(task)
