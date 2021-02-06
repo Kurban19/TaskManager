@@ -2,7 +2,6 @@
 package com.shkiper.taskmanager
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private var sizeOfDoneTasks: Int = 0
     private var sizeOfTasks: Int = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             openDialog()
         }
-
     }
 
     private fun openDialog(){
@@ -79,22 +76,22 @@ class MainActivity : AppCompatActivity() {
         taskDialog.show(fm, "Open Dialog")
     }
 
-    private fun bindCounter(quantity: Int){
+    private fun bindDoingCounter(quantity: Int){
         tv_doing.text = quantity.toString()
         sizeOfTasks = quantity
-        pie_progress.setProgress(Utils.percentOfDone(sizeOfDoneTasks, quantity).toFloat(), true)
+        pie_progress.setProgress(Utils.percentOfDone(sizeOfDoneTasks, quantity), true)
     }
 
     private fun bindDoneCounter(quantity: Int){
         tv_done.text = quantity.toString()
         sizeOfDoneTasks = quantity
-        pie_progress.setProgress(Utils.percentOfDone(quantity, sizeOfTasks).toFloat(), true)
+        pie_progress.setProgress(Utils.percentOfDone(quantity, sizeOfTasks), true)
     }
 
     private fun initViewModel() {
         viewModel = ViewModelProvider(this, MyViewModelFactory(TaskRepository(this))).get(MainViewModel::class.java)
         viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
-//        viewModel.getSizeOfTasks().observe(this, Observer { bindCounter(it) })
+        viewModel.getSizeOfTasks().observe(this, Observer { bindDoingCounter(it) })
 //        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
     }
 
