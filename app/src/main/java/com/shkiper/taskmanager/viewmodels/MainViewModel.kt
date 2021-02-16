@@ -7,12 +7,7 @@ import com.shkiper.taskmanager.repositories.TaskRepository
 
 class MainViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 
-    private val tasks = Transformations.map(taskRepository.loadTasks()) { tasks ->
-        return@map tasks.filter {!it.isComplete}
-    }
-
-    private val taskDoneSizeInt = MutableLiveData(0)
-    private val taskSizeInt = MutableLiveData(0)
+    private val tasks = taskRepository.loadTasks()
 
 
     fun getTaskData(): LiveData<List<Task>> {
@@ -22,7 +17,6 @@ class MainViewModel(private val taskRepository: TaskRepository) : ViewModel() {
     fun insertTask(task: Task){
         taskRepository.insert(task)
     }
-
 
     fun addToDone(task: Task) {
         task.isComplete = true
@@ -38,13 +32,6 @@ class MainViewModel(private val taskRepository: TaskRepository) : ViewModel() {
         taskRepository.deleteAll()
     }
 
-    fun getSizeOfTasks(): MutableLiveData<Int> {
-        return taskSizeInt
-    }
-
-    fun getSizeOfDoneTasks(): MutableLiveData<Int> {
-        return taskDoneSizeInt
-    }
 
 
 }

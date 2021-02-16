@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.add_task_dialog.*
 
 class MainActivity : AppCompatActivity() {
 
-
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var viewModel: MainViewModel
     private var sizeOfDoneTasks: Int = 0
@@ -90,9 +89,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewModel() {
         viewModel = ViewModelProvider(this, MyViewModelFactory(TaskRepository(this))).get(MainViewModel::class.java)
-        viewModel.getTaskData().observe(this, Observer { taskAdapter.updateData(it) })
-        viewModel.getSizeOfTasks().observe(this, Observer { bindDoingCounter(it) })
-//        viewModel.getSizeOfDoneTasks().observe(this, Observer { bindDoneCounter(it) })
+        viewModel.getTaskData().observe(this, Observer { tasks ->
+            taskAdapter.updateData(tasks.filter { !it.isComplete })
+            bindDoingCounter(tasks.size)
+            bindDoneCounter(tasks.filter { it.isComplete }.size)
+        })
     }
 
     fun addTask(task: Task){
